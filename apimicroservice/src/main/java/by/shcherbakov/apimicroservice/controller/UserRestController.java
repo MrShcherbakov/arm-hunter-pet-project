@@ -1,5 +1,6 @@
 package by.shcherbakov.apimicroservice.controller;
 
+import by.shcherbakov.apimicroservice.service.UserService;
 import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserRestController {
 
+    private final UserService service;
+
     @GetMapping("/find/{id}")
-    public ResponseEntity<UserDto> findUser(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<UserDto> findUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findUserById(id));
     }
 }
