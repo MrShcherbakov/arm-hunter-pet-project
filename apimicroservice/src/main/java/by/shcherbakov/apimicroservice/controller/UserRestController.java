@@ -1,5 +1,6 @@
 package by.shcherbakov.apimicroservice.controller;
 
+import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,6 @@ public class UserRestController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<UserDto> findUser(@PathVariable Long id) {
-        return
+        return null;
     }
 }
