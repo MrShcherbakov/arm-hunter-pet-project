@@ -1,8 +1,8 @@
 package by.shcherbakov.apimicroservice.service.impl;
 
 import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
+import by.shcherbakov.apimicroservice.domain.dto.UserDto;
 import by.shcherbakov.apimicroservice.service.UserService;
-import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final ReplyingKafkaTemplate<String,Long,UserDto> replyingKafkaTemplate;
+    private final ReplyingKafkaTemplate<String,Long, UserDto> replyingKafkaTemplate;
     private final KafkaTopicsProperties topicProps;
 
     @Override

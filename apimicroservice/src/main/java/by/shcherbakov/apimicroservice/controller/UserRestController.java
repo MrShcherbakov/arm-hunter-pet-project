@@ -1,7 +1,7 @@
 package by.shcherbakov.apimicroservice.controller;
 
+import by.shcherbakov.apimicroservice.domain.dto.UserDto;
 import by.shcherbakov.apimicroservice.service.UserService;
-import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

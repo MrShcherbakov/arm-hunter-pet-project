@@ -12,7 +12,6 @@
     <name>arm-hunter</name>
 
     <modules>
-        <module>core-domain</module>
         <module>core-api</module>
         <module>apimicroservice</module>
         <module>resumemicroservice</module>
