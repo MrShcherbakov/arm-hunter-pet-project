@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -19,8 +20,9 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "resumes")
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Resume> resumes;
 }

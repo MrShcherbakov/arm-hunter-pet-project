@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Table(name = "resumes")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Resume {
@@ -18,7 +19,7 @@ public class Resume {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "user")
+    @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 }
