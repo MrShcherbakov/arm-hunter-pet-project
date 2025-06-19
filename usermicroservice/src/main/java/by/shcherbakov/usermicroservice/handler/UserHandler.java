@@ -22,9 +22,7 @@ public class UserHandler {
     )
     public UserDto findUserById(Long id) {
         log.info("Id in findUserById was received successfully: {}",id);
-        UserDto dto = service.findUserById(id);
-        log.info("UserDto was sended successfully: {}",dto);
-        return dto;
+        return service.findUserById(id);
     }
 
 }
