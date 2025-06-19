@@ -1,8 +1,8 @@
 package by.shcherbakov.usermicroservice.config.producer;
 
+import by.shcherbakov.core_domain.dto.UserDto;
 import by.shcherbakov.usermicroservice.config.properties.GeneralProperties;
 import by.shcherbakov.usermicroservice.config.properties.producer.UserDtoProducerFactoryProperties;
-import by.shcherbakov.usermicroservice.domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class UserDtoKafkaTemplateConfig {
     private final UserDtoProducerFactoryProperties prodProps;
 
     @Bean
-    public KafkaTemplate<String,UserDto> userDtoKafkaTemplate(
+    public KafkaTemplate<String, UserDto> userDtoKafkaTemplate(
             ProducerFactory<String,UserDto> pf
     ) {
         return new KafkaTemplate<>(pf);

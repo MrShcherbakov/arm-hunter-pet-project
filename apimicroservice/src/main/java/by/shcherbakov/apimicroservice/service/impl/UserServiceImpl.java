@@ -1,8 +1,8 @@
 package by.shcherbakov.apimicroservice.service.impl;
 
 import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
-import by.shcherbakov.apimicroservice.domain.dto.UserDto;
 import by.shcherbakov.apimicroservice.service.UserService;
+import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

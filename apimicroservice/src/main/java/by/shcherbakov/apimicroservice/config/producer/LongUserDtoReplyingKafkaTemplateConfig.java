@@ -4,7 +4,7 @@ import by.shcherbakov.apimicroservice.config.properties.GeneralProperties;
 import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
 import by.shcherbakov.apimicroservice.config.properties.consumer.UserDtoConsumerFactoryProperties;
 import by.shcherbakov.apimicroservice.config.properties.producer.LongProducerFactoryProperties;
-import by.shcherbakov.apimicroservice.domain.dto.UserDto;
+import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;

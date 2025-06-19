@@ -1,7 +1,7 @@
 package by.shcherbakov.apimicroservice.service;
 
 
-import by.shcherbakov.apimicroservice.domain.dto.UserDto;
+import by.shcherbakov.core_domain.dto.UserDto;
 
 public interface UserService {
     UserDto findUserById(Long id);

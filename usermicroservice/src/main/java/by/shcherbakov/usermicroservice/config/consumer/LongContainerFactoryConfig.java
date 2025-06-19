@@ -1,8 +1,8 @@
 package by.shcherbakov.usermicroservice.config.consumer;
 
+import by.shcherbakov.core_domain.dto.UserDto;
 import by.shcherbakov.usermicroservice.config.properties.GeneralProperties;
 import by.shcherbakov.usermicroservice.config.properties.consumer.LongConsumerFactoryProperties;
-import by.shcherbakov.usermicroservice.domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;
