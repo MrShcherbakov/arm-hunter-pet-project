@@ -21,8 +21,17 @@ public class UserHandler {
             containerFactory = "longContainerFactory"
     )
     public UserDto findUserById(Long id) {
-        log.info("Id in findUserById was received successfully: {}",id);
+        log.info("Id in findUserById endpoint was received: {}",id);
         return service.findUserById(id);
+    }
+
+    @KafkaListener(
+            topics = "#{@kafkaTopicsProperties.userSaveRequest}",
+            containerFactory = "userDtoContainerFactory"
+    )
+    public void saveUser(UserDto dto) {
+        log.info("UserDto in saveUser endpoint was received: {}",dto);
+        service.saveUser(dto);
     }
 
 }

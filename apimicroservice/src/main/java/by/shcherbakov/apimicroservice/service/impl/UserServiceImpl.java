@@ -8,11 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.requestreply.RequestReplyFuture;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @Slf4j
@@ -20,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final KafkaTemplate<String,UserDto> kafkaTemplate;
     private final ReplyingKafkaTemplate<String,Long, UserDto> replyingKafkaTemplate;
     private final KafkaTopicsProperties topicProps;
 
@@ -43,5 +47,25 @@ public class UserServiceImpl implements UserService {
         }
 
         return response.value();
+    }
+
+    @Override
+    public String saveUser(UserDto dto) {
+        SendResult<String,UserDto> result = null;
+        try {
+            result = kafkaTemplate.send(
+                topicProps.getUserSaveRequest(),dto
+            ).get();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        if (result != null) {
+            log.info("Request to saveUser endpoint was sended successfully: {}",result.getProducerRecord());
+            return "Request was sended successfully: " + result.getProducerRecord();
+        }
+        log.error("Request was sended in saveUser endpoint, but SendResult is null: {}",result);
+        return "Request was sended, but SendResult is null";
     }
 }

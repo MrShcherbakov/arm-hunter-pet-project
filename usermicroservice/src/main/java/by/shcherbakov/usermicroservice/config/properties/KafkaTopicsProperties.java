@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class KafkaTopicsProperties {
     private String userFindRequest;
     private String userFindResponse;
+    private String userSaveRequest;
 }

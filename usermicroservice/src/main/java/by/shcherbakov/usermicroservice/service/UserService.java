@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface UserService {
     UserDto findUserById(Long id);
+    void saveUser(UserDto dto);
     User checkNullPointerException(Optional<User> user);
 }

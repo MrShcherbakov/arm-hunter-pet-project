@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.ArrayList;
 
 @Data
-@ConfigurationProperties(prefix = "general")
-public class GeneralProperties {
+@ConfigurationProperties(prefix = "kafka")
+public class KafkaProperties {
     private final ArrayList<String> bootstrapServers;
 }

@@ -8,4 +8,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class KafkaTopicsProperties {
     private final String userFindRequest;
     private final String userFindResponse;
+    private final String userSaveRequest;
 }

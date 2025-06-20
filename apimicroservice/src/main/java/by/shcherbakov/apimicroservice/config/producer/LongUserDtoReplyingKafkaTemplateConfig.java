@@ -1,6 +1,6 @@
 package by.shcherbakov.apimicroservice.config.producer;
 
-import by.shcherbakov.apimicroservice.config.properties.GeneralProperties;
+import by.shcherbakov.apimicroservice.config.properties.KafkaProperties;
 import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
 import by.shcherbakov.apimicroservice.config.properties.consumer.UserDtoConsumerFactoryProperties;
 import by.shcherbakov.apimicroservice.config.properties.producer.LongProducerFactoryProperties;
@@ -27,7 +27,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class LongUserDtoReplyingKafkaTemplateConfig {
 
-    private final GeneralProperties genProps;
+    private final KafkaProperties kafkaProps;
     private final KafkaTopicsProperties topicProps;
     private final LongProducerFactoryProperties prodProps;
     private final UserDtoConsumerFactoryProperties consProps;
@@ -66,7 +66,7 @@ public class LongUserDtoReplyingKafkaTemplateConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                genProps.getBootstrapServers());
+                kafkaProps.getBootstrapServers());
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 consProps.getKeyDeserializer());
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
@@ -85,7 +85,7 @@ public class LongUserDtoReplyingKafkaTemplateConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                genProps.getBootstrapServers());
+                kafkaProps.getBootstrapServers());
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 prodProps.getKeySerializer());
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,

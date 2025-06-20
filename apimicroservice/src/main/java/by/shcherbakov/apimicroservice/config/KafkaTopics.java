@@ -29,4 +29,12 @@ public class KafkaTopics {
                 .build();
     }
 
+    @Bean
+    public NewTopic userSaveRequest() {
+        return TopicBuilder.name(topicProps.getUserSaveRequest())
+                .replicas(2)
+                .partitions(3)
+                .build();
+    }
+
 }
