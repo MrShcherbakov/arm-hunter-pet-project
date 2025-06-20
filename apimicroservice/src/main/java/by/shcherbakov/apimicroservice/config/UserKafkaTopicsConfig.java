@@ -9,9 +9,9 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 @AllArgsConstructor
-public class KafkaTopics {
+public class UserKafkaTopicsConfig {
 
-    private final KafkaTopicsProperties topicProps;
+    private final KafkaTopicsProperties.UserTopicProperties topicProps;
 
     @Bean
     public NewTopic userFindRequest() {

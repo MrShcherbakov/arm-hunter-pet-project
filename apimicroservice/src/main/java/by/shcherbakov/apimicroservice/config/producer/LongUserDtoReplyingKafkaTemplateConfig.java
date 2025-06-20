@@ -28,7 +28,7 @@ import java.util.Map;
 public class LongUserDtoReplyingKafkaTemplateConfig {
 
     private final KafkaProperties kafkaProps;
-    private final KafkaTopicsProperties topicProps;
+    private final KafkaTopicsProperties.UserTopicProperties topicProps;
     private final LongProducerFactoryProperties prodProps;
     private final UserDtoConsumerFactoryProperties consProps;
 

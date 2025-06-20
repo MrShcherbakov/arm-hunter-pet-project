@@ -17,14 +17,13 @@ public class UserRestController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<UserDto> findUserById(@PathVariable Long id) {
-        log.info("Id in findUserById endpoint was received successfully: {}",id);
+        log.info("Id was received in findUserById endpoint: {}",id);
         return ResponseEntity.ok(service.findUserById(id));
     }
 
     @PostMapping("/save")
     public ResponseEntity<String> saveUser(@RequestBody UserDto dto) {
-        log.info("UserDto was received in saveUser endpoint was received" +
-                "successfully: {}",dto);
+        log.info("UserDto was received in saveUser endpoint: {}",dto);
         return ResponseEntity.ok(service.saveUser(dto));
     }
 }

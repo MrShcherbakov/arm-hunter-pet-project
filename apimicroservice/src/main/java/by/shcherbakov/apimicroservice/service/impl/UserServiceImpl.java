@@ -25,17 +25,22 @@ public class UserServiceImpl implements UserService {
 
     private final KafkaTemplate<String,UserDto> kafkaTemplate;
     private final ReplyingKafkaTemplate<String,Long, UserDto> replyingKafkaTemplate;
-    private final KafkaTopicsProperties topicProps;
+    private final KafkaTopicsProperties.UserTopicProperties topicProps;
 
     @Override
     public UserDto findUserById(Long id) {
 
         ProducerRecord<String,Long> request =
                 new ProducerRecord<>(topicProps.getUserFindRequest(),id);
-        request.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC,topicProps.getUserFindResponse().getBytes()));
+        request.headers().add(new RecordHeader(
+                KafkaHeaders.REPLY_TOPIC,
+                topicProps.getUserFindResponse().getBytes()
+        ));
+
         RequestReplyFuture<String,Long,UserDto> future =
                 replyingKafkaTemplate.sendAndReceive(request);
         log.info("ProducerRecord in findUserById was sended successfully: {}",request);
+
         ConsumerRecord<String,UserDto> response;
         try {
             response = future.get();
@@ -51,21 +56,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String saveUser(UserDto dto) {
-        SendResult<String,UserDto> result = null;
         try {
-            result = kafkaTemplate.send(
+            SendResult<String,UserDto> result = kafkaTemplate.send(
                 topicProps.getUserSaveRequest(),dto
             ).get();
+            log.info("Request was sended in usermicroservice.saveUser: {}",result);
+            return "Request was sended in usermicroservice.saveUser endpoint";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-        if (result != null) {
-            log.info("Request to saveUser endpoint was sended successfully: {}",result.getProducerRecord());
-            return "Request was sended successfully: " + result.getProducerRecord();
-        }
-        log.error("Request was sended in saveUser endpoint, but SendResult is null: {}",result);
-        return "Request was sended, but SendResult is null";
     }
 }
