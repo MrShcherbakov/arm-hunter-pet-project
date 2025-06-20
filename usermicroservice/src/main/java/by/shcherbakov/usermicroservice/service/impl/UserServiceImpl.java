@@ -20,15 +20,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final MapperServiceUtilImpl service;
     private final ApiUrlsProperties urlProps;
     private final UserRepository repository;
-    private final RestTemplate restTemplate;
 
     @Override
     public UserDto findUserById(Long id) {
         Optional<User> optional = repository.findById(id);
         User user = checkNullPointerException(optional);
-        return toDto(user);
+        return service.requestToMap(
+               urlProps.getToUserdtoUrl(),
+               user,
+               UserDto.class
+        );
     }
 
     @Override
@@ -41,43 +45,5 @@ public class UserServiceImpl implements UserService {
             throw new NullPointerException("User was retrieved from bd with null");
         }
     }
-
-    //Only for rest getMapping
-    @Override
-    public Object checkRestStatusCodeException(ResponseEntity<?> entity) {
-        if (entity.getStatusCode() == HttpStatusCode.valueOf(200)) {
-            log.info("RestTemplate received entity {} with status code 200",entity.getBody());
-            return entity.getBody();
-        } else {
-            log.error("RestTemplate received entity {} with another status code {}",entity,entity.getStatusCode());
-            throw new HttpRestStatusCodeException("RestTemplate received entity with another status code "
-                    + entity.getStatusCode());
-        }
-    }
-
-    @Override
-    public User toUser(UserDto dto) {
-        ResponseEntity<User> entity =
-                restTemplate.postForEntity(
-                        urlProps.getToUserUrl(),
-                        dto,
-                        User.class
-                );
-        log.info("User was received successfully from /to-user: {}",entity.getBody());
-        return (User) checkRestStatusCodeException(entity);
-    }
-
-    @Override
-    public UserDto toDto(User user) {
-        ResponseEntity<UserDto> entity =
-                restTemplate.postForEntity(
-                        urlProps.getToUserdtoUrl(),
-                        user,
-                        UserDto.class
-                );
-        log.info("UserDto was received successfully from /to-userdto: {}",entity);
-        return (UserDto) checkRestStatusCodeException(entity);
-    }
-
 
 }
