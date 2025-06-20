@@ -1,7 +1,7 @@
 package by.shcherbakov.usermicroservice.config.producer;
 
 import by.shcherbakov.core_domain.dto.UserDto;
-import by.shcherbakov.usermicroservice.config.properties.GeneralProperties;
+import by.shcherbakov.usermicroservice.config.properties.KafkaProperties;
 import by.shcherbakov.usermicroservice.config.properties.producer.UserDtoProducerFactoryProperties;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -18,7 +18,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class UserDtoKafkaTemplateConfig {
 
-    private final GeneralProperties genProps;
+    private final KafkaProperties kafkaProps;
     private final UserDtoProducerFactoryProperties prodProps;
 
     @Bean
@@ -37,7 +37,7 @@ public class UserDtoKafkaTemplateConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                genProps.getBootstrapServers());
+                kafkaProps.getBootstrapServers());
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 prodProps.getKeySerializer());
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,

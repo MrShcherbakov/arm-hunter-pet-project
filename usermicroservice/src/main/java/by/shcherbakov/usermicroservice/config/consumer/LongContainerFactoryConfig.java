@@ -1,7 +1,7 @@
 package by.shcherbakov.usermicroservice.config.consumer;
 
 import by.shcherbakov.core_domain.dto.UserDto;
-import by.shcherbakov.usermicroservice.config.properties.GeneralProperties;
+import by.shcherbakov.usermicroservice.config.properties.KafkaProperties;
 import by.shcherbakov.usermicroservice.config.properties.consumer.LongConsumerFactoryProperties;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -22,7 +22,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class LongContainerFactoryConfig {
 
-    private final GeneralProperties genProps;
+    private final KafkaProperties kafkaProps;
     private final LongConsumerFactoryProperties consProps;
 
     @Bean
@@ -47,7 +47,7 @@ public class LongContainerFactoryConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                genProps.getBootstrapServers());
+                kafkaProps.getBootstrapServers());
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 consProps.getKeyDeserializer());
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component("kafkaTopicsProperties")
-@ConfigurationProperties(prefix = "topics")
+@ConfigurationProperties(prefix = "kafka.topics")
 public class KafkaTopicsProperties {
     private String userFindRequest;
     private String userFindResponse;

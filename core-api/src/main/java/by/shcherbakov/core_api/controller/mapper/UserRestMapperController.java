@@ -3,14 +3,13 @@ package by.shcherbakov.core_api.controller.mapper;
 import by.shcherbakov.core_api.service.MapperService;
 import by.shcherbakov.core_domain.dto.UserDto;
 import by.shcherbakov.core_domain.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
-@RequestMapping("/mapper/user")
+@RequestMapping("/mapper")
 public class UserRestMapperController {
 
     public UserRestMapperController(@Qualifier("userMapperService") MapperService service) {
@@ -19,13 +18,19 @@ public class UserRestMapperController {
 
     private final MapperService service;
 
-    @GetMapping("/to-user")
+    @PostMapping("/to-user")
     public User toUser(@RequestBody UserDto dto) {
-        return (User) service.toObject(dto);
+        log.info("Request toUser was received: {}",dto);
+        User user = (User) service.toObject(dto);
+        log.info("Mapping userDto to user was finished successfully: {}",user);
+        return user;
     }
 
-    @GetMapping("/to-userdto")
+    @PostMapping("/to-userdto")
     public UserDto toUserDto(@RequestBody User user) {
-        return (UserDto) service.toDto(user);
+        log.info("Request toUserDto was received: {}",user);
+        UserDto dto = (UserDto) service.toDto(user);
+        log.info("Mapping user to userDto was finished successfully: {}",dto);
+        return dto;
     }
 }

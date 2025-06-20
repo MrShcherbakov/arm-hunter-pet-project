@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Data
-@ConfigurationProperties(prefix = "general")
-public class GeneralProperties {
-    private final ArrayList<String> bootstrapServers;
+@Component("kafkaProperties")
+@ConfigurationProperties(prefix = "kafka")
+public class KafkaProperties {
+    private ArrayList<String> bootstrapServers;
 }
