@@ -33,11 +33,12 @@ public class MapperServiceUtilImpl implements MapperServiceUtil {
     @Override
     public <R> R checkStatusCode(ResponseEntity<R> entity) {
         if (entity.getStatusCode() == HttpStatusCode.valueOf(200)) {
-            log.info("RestTemplate received entity {} with status code 200",entity.getBody());
+            log.info("RestTemplate returned entity {} with status code 200",entity.getBody());
             return entity.getBody();
         } else {
-            log.error("RestTemplate received entity {} with another status code {}",entity,entity.getStatusCode());
-            throw new HttpRestStatusCodeException("RestTemplate received entity with another status code "
+            log.error("RestTemplate returned entity {} with another status code {}",
+                    entity.getBody(),entity.getStatusCode());
+            throw new HttpRestStatusCodeException("RestTemplate returned entity with another status code "
                     + entity.getStatusCode());
         }
     }

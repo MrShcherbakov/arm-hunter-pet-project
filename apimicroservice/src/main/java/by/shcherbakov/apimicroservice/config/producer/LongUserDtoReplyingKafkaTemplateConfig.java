@@ -1,13 +1,13 @@
 package by.shcherbakov.apimicroservice.config.producer;
 
-import by.shcherbakov.apimicroservice.config.properties.KafkaProperties;
-import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
 import by.shcherbakov.apimicroservice.config.properties.consumer.UserDtoConsumerFactoryProperties;
 import by.shcherbakov.apimicroservice.config.properties.producer.LongProducerFactoryProperties;
+import by.shcherbakov.apimicroservice.config.properties.topic.UserKafkaTopicsProperties;
 import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -20,15 +20,18 @@ import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
 @AllArgsConstructor
 public class LongUserDtoReplyingKafkaTemplateConfig {
 
-    private final KafkaProperties kafkaProps;
-    private final KafkaTopicsProperties.UserTopicProperties topicProps;
+    @Value("${spring.kafka.bootstrap-servers}")
+    private final List<String> bootstrapServers;
+    private final UserKafkaTopicsProperties topicProps;
     private final LongProducerFactoryProperties prodProps;
     private final UserDtoConsumerFactoryProperties consProps;
 
@@ -66,7 +69,7 @@ public class LongUserDtoReplyingKafkaTemplateConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                kafkaProps.getBootstrapServers());
+                bootstrapServers);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 consProps.getKeyDeserializer());
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
@@ -85,7 +88,7 @@ public class LongUserDtoReplyingKafkaTemplateConfig {
         Map<String,Object> config = new HashMap<>();
 
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                kafkaProps.getBootstrapServers());
+                bootstrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 prodProps.getKeySerializer());
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,

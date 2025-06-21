@@ -1,6 +1,6 @@
 package by.shcherbakov.apimicroservice.service.impl;
 
-import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
+import by.shcherbakov.apimicroservice.config.properties.topic.ResumeKafkaTopicsProperties;
 import by.shcherbakov.apimicroservice.service.ResumeService;
 import by.shcherbakov.core_domain.dto.ResumeDto;
 import lombok.AllArgsConstructor;
@@ -17,16 +17,16 @@ import java.util.concurrent.ExecutionException;
 public class ResumeServiceImpl implements ResumeService {
 
     private final KafkaTemplate<String,ResumeDto> kafkaTemplate;
-    private final KafkaTopicsProperties topicProps;
+    private final ResumeKafkaTopicsProperties topicProps;
 
     @Override
     public String saveResume(ResumeDto dto) {
         try {
             SendResult<String,ResumeDto> result = kafkaTemplate.send(
-                            topicProps.getResumeProps().getResumeSaveRequest(),
+                            topicProps.getResumeSaveRequest(),
                             dto
                     ).get();
-            log.info("Request was sended in resumemicroservice.saveResume endpoint: {}",result);
+            log.info("Request was sended in resumemicroservice.saveResume endpoint: {}",result.getProducerRecord());
             return "Request was sended in resumemicroservice.saveResume endpoint:";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

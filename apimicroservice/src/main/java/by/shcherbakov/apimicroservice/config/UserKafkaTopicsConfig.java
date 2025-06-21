@@ -1,6 +1,6 @@
 package by.shcherbakov.apimicroservice.config;
 
-import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
+import by.shcherbakov.apimicroservice.config.properties.topic.UserKafkaTopicsProperties;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.kafka.config.TopicBuilder;
 @AllArgsConstructor
 public class UserKafkaTopicsConfig {
 
-    private final KafkaTopicsProperties.UserTopicProperties topicProps;
+    private final UserKafkaTopicsProperties topicProps;
 
     @Bean
     public NewTopic userFindRequest() {

@@ -1,6 +1,6 @@
 package by.shcherbakov.apimicroservice.service.impl;
 
-import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
+import by.shcherbakov.apimicroservice.config.properties.topic.UserKafkaTopicsProperties;
 import by.shcherbakov.apimicroservice.service.UserService;
 import by.shcherbakov.core_domain.dto.UserDto;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @Slf4j
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private final KafkaTemplate<String,UserDto> kafkaTemplate;
     private final ReplyingKafkaTemplate<String,Long, UserDto> replyingKafkaTemplate;
-    private final KafkaTopicsProperties.UserTopicProperties topicProps;
+    private final UserKafkaTopicsProperties topicProps;
 
     @Override
     public UserDto findUserById(Long id) {
@@ -60,7 +59,7 @@ public class UserServiceImpl implements UserService {
             SendResult<String,UserDto> result = kafkaTemplate.send(
                 topicProps.getUserSaveRequest(),dto
             ).get();
-            log.info("Request was sended in usermicroservice.saveUser: {}",result);
+            log.info("Request was sended in usermicroservice.saveUser: {}",result.getProducerRecord());
             return "Request was sended in usermicroservice.saveUser endpoint";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

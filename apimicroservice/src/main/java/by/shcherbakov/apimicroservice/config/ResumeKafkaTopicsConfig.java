@@ -1,6 +1,6 @@
 package by.shcherbakov.apimicroservice.config;
 
-import by.shcherbakov.apimicroservice.config.properties.KafkaTopicsProperties;
+import by.shcherbakov.apimicroservice.config.properties.topic.ResumeKafkaTopicsProperties;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.kafka.config.TopicBuilder;
 @AllArgsConstructor
 public class ResumeKafkaTopicsConfig {
 
-    private final KafkaTopicsProperties.ResumeTopicProperties topicProps;
+    private final ResumeKafkaTopicsProperties topicProps;
 
     @Bean
     public NewTopic saveResume() {

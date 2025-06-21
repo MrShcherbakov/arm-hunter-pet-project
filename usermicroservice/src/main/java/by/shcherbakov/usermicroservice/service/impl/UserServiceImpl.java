@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
                 User.class
         );
         User userBd = repository.save(user);
-        log.info("User was saved in service saveUser: {}",userBd);
+        log.info("User was saved in UserServiceImpl.saveUser: {}",userBd);
     }
 
     @Override

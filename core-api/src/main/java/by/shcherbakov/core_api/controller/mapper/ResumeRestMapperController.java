@@ -5,13 +5,14 @@ import by.shcherbakov.core_domain.dto.ResumeDto;
 import by.shcherbakov.core_domain.entity.Resume;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/mapper/resume")
+@RequestMapping("/mapper")
 public class ResumeRestMapperController {
 
     public ResumeRestMapperController(@Qualifier("resumeMapperService") MapperService service) {
@@ -20,16 +21,16 @@ public class ResumeRestMapperController {
 
     private final MapperService service;
 
-    @GetMapping("/to-resume")
-    public Resume toResume(ResumeDto dto) {
+    @PostMapping("/to-resume")
+    public Resume toResume(@RequestBody ResumeDto dto) {
         log.info("Request toResume was received: {}",dto);
         Resume resume = (Resume) service.toObject(dto);
         log.info("Mapping resumeDto to resume was finished successfully: {}",dto);
         return resume;
     }
 
-    @GetMapping("/to-resumedto")
-    public ResumeDto toDto(Resume resume) {
+    @PostMapping("/to-resumedto")
+    public ResumeDto toDto(@RequestBody Resume resume) {
         log.info("Request toResumeDto was received: {}",resume);
         ResumeDto dto = (ResumeDto) service.toDto(resume);
         log.info("Mapping resume to resumeDto was finished successfully: {}",resume);
