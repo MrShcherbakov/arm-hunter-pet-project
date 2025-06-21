@@ -26,4 +26,5 @@ public class UserRestController {
         log.info("UserDto was received in saveUser endpoint: {}",dto);
         return ResponseEntity.ok(service.saveUser(dto));
     }
+
 }
