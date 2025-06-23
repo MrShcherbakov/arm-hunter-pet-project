@@ -73,8 +73,3 @@ services:
       - kafka-server-2
     ports:
       - "8080:8080"
-  core-api:
-    restart: always
-    build: core-api/.
-    ports:
-      - "8081:8081"

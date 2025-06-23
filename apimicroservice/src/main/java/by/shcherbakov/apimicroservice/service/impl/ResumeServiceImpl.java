@@ -25,10 +25,14 @@ public class ResumeServiceImpl implements ResumeService {
     private final KafkaTemplate<String,ResumeDto> kafkaTemplate;
     private final ResumeKafkaTopicsProperties topicProps;
     private final RestTemplate restTemplate;
+    private final UserServiceImpl userService;
 
     @Override
     public String saveResume(ResumeDto dto) {
-        addResume(findUserById(dto.getUser().getId()),dto);
+        addResumeToUser(
+                dto,
+                userService.findUserById(dto.getUser().getId())
+        );
         try {
             SendResult<String,ResumeDto> result = kafkaTemplate.send(
                             topicProps.getResumeSaveRequest(),
@@ -43,24 +47,7 @@ public class ResumeServiceImpl implements ResumeService {
         }
     }
 
-    private UserDto findUserById(Long id) {
-        String findUserUrl = "http://localhost:8080/user/find/";
-        ResponseEntity<UserDto> entity = restTemplate.getForEntity(
-                findUserUrl + id,
-                UserDto.class
-        );
-        if (entity.getStatusCode() == HttpStatusCode.valueOf(200)) {
-            log.info("RestTemplate returned entity from {} with status code 200: {}",
-                    findUserUrl,entity);
-            return entity.getBody();
-        } else {
-            log.error("RestTemplate returned entity from {} with status code {}",
-                    findUserUrl,entity.getStatusCode());
-            throw new HttpRestStatusCodeException("RestTemplate returned entity with another status code");
-        }
-    }
-
-    private void addResume(UserDto userDto,ResumeDto resumeDto) {
+    private void addResumeToUser(ResumeDto resumeDto,UserDto userDto) {
         if (userDto == null) {
             String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
             log.error("UserDto is null in method {}",methodName);

@@ -26,7 +26,6 @@
     <modules>
         <module>core-domain</module>
         <module>usermicroservice</module>
-        <module>core-api</module>
         <module>apimicroservice</module>
         <module>resumemicroservice</module>
     </modules>
