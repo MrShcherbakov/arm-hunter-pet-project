@@ -25,4 +25,11 @@ public class User {
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Resume> resumes;
+
+    @Override
+    public String toString() {
+        return "entity.User{id="+id+","
+                +"username="+username+","
+                +"password="+password+"}";
+    }
 }

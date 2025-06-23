@@ -15,9 +15,9 @@ public class UserHandler {
 
     private final UserService service;
 
-    @SendTo("#{@kafkaTopicsProperties.userFindResponse}")
+    @SendTo("user.find.response")
     @KafkaListener(
-            topics = "#{@kafkaTopicsProperties.userFindRequest}",
+            topics = "user.find.request",
             containerFactory = "longContainerFactory"
     )
     public UserDto findUserById(Long id) {
@@ -26,7 +26,7 @@ public class UserHandler {
     }
 
     @KafkaListener(
-            topics = "#{@kafkaTopicsProperties.userSaveRequest}",
+            topics = "user.save.request",
             containerFactory = "userDtoContainerFactory"
     )
     public void saveUser(UserDto dto) {

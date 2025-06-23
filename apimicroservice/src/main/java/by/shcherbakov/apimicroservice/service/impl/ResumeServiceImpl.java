@@ -66,7 +66,7 @@ public class ResumeServiceImpl implements ResumeService {
             log.error("UserDto is null in method {}",methodName);
             throw new NullPointerException("UserDto is null in method " + methodName);
         }
-        String saveUserUrl = "http://localhost:8080/user/save";
+        String saveUserUrl = "http://apimicroservice:8080/user/save";
         List<ResumeDto> resumes = userDto.getResumes();
         resumes.add(resumeDto);
         userDto.setResumes(resumes);
