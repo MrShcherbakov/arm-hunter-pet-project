@@ -16,7 +16,8 @@ This pet project is a simplified REST-based version of HeadHunter. It has users,
 1. Create an empty directory and navigate into it.
 2. Run the following full command to set up and run the project:
 `git init . && git pull https://github.com/MrShcherbakov/arm-hunter-pet-project.git master && mvn install && docker compose up`
-<br/>**Attention, Kafka may take up to 5 minutes to start without cache**
+<br/>**Attention, Kafka may take up to 5 minutes to start without cache:**
+![timeToReady](https://github.com/user-attachments/assets/cc4f3c2f-90ef-4e45-b687-9d15f5fe8566)
 - git init . – Initialize a local repository
 - git pull https://github.com/MrShcherbakov/arm-hunter-pet-project.git master – Pull the project
 - mvn install – Build the project
