@@ -12,8 +12,8 @@ This pet project is the rest copy of **head hunter** in some way. It has users, 
 # Architecture diagram
 ![SchemaPng](https://github.com/user-attachments/assets/a734655f-e9d9-40e2-b14b-8f43930eb97f)
 
-#Run
-Full command to 
+# Run
+Full command to run the microservices
 # Postman
 - Request to saving a user
 ![postmanSaveUser](https://github.com/user-attachments/assets/94976d1a-669b-4a7f-b5cb-5b4be05888f8)
