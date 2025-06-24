@@ -59,8 +59,10 @@ public class UserServiceImpl implements UserService {
             SendResult<String,UserDto> result = kafkaTemplate.send(
                 topicProps.getUserSaveRequest(),dto
             ).get();
-            log.info("Request was sended in usermicroservice.saveUser: {}",result.getProducerRecord());
-            return "Request was sended in usermicroservice.saveUser endpoint";
+            log.info("Request was sended in usermicroservice.saveUser endpoint: {}"
+                    ,result.getRecordMetadata());
+            return "Request was sended in usermicroservice.saveUser endpoint: "
+                    + result.getProducerRecord().value();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {

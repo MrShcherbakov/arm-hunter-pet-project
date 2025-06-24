@@ -38,8 +38,10 @@ public class ResumeServiceImpl implements ResumeService {
                             topicProps.getResumeSaveRequest(),
                             dto
                     ).get();
-            log.info("Request was sended in resumemicroservice.saveResume endpoint: {}",result.getProducerRecord());
-            return "Request was sended in resumemicroservice.saveResume endpoint:";
+            log.info("Request was sended in resumemicroservice.saveResume endpoint: {}"
+                    ,result.getRecordMetadata());
+            return "Request was sended in resumemicroservice.saveResume endpoint: "
+                    + result.getProducerRecord().value();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
