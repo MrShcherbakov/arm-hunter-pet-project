@@ -38,9 +38,9 @@ public class ResumeServiceImpl implements ResumeService {
                             topicProps.getResumeSaveRequest(),
                             dto
                     ).get();
-            log.info("Request for the saving the resume was sended in resumemicroservice: {}"
+            log.info("Request for the saving the resume was sent in resumemicroservice: {}"
                     ,result.getRecordMetadata());
-            return "Request for the saving the resume was sended";
+            return "Request for the saving the resume was sent";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
@@ -58,9 +58,9 @@ public class ResumeServiceImpl implements ResumeService {
                             topicProps.getResumeDeleteRequest(),
                             dto
                     ).get();
-            log.info("Request for the deleting the resume by id was sended in resumemicroservice: {}",
+            log.info("Request for the deleting the resume by id was sent in resumemicroservice: {}",
                     result.getRecordMetadata());
-            return "Resuest for the deleting the resume by id was sended";
+            return "Request for the deleting the resume by id was sent";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
