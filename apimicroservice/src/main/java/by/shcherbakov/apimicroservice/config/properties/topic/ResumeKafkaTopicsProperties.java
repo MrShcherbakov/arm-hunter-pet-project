@@ -7,4 +7,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "topics.resume")
 public class ResumeKafkaTopicsProperties {
     private final String resumeSaveRequest;
+    private final String resumeDeleteRequest;
 }

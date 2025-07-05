@@ -38,10 +38,29 @@ public class ResumeServiceImpl implements ResumeService {
                             topicProps.getResumeSaveRequest(),
                             dto
                     ).get();
-            log.info("Request was sended in resumemicroservice.saveResume endpoint: {}"
+            log.info("Request for the saving the resume was sended in resumemicroservice: {}"
                     ,result.getRecordMetadata());
-            return "Request was sended in resumemicroservice.saveResume endpoint: "
-                    + result.getProducerRecord().value();
+            return "Request for the saving the resume was sended";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String deleteResumeById(Long id) {
+        ResumeDto dto = new ResumeDto();
+        dto.setId(id);
+        try {
+            SendResult<String,ResumeDto> result =
+                    kafkaTemplate.send(
+                            topicProps.getResumeDeleteRequest(),
+                            dto
+                    ).get();
+            log.info("Request for the deleting the resume by id was sended in resumemicroservice: {}",
+                    result.getRecordMetadata());
+            return "Resuest for the deleting the resume by id was sended";
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
@@ -51,9 +70,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     private void addResumeToUser(ResumeDto resumeDto,UserDto userDto) {
         if (userDto == null) {
-            String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-            log.error("UserDto is null in method {}",methodName);
-            throw new NullPointerException("UserDto is null in method " + methodName);
+            log.error("UserDto is null in ResumeServiceImpl.addResumeToUser");
+            throw new NullPointerException("UserDto is null in ResumeServiceImpl.addResumeToUser");
         }
         String saveUserUrl = "http://apimicroservice:8080/user/save";
         List<ResumeDto> resumes = userDto.getResumes();
@@ -63,6 +81,6 @@ public class ResumeServiceImpl implements ResumeService {
                 saveUserUrl,
                 userDto
         );
-        log.info("Request to save user was posted to {}",saveUserUrl);
+        log.info("Request for the saving the user was posted to {}",saveUserUrl);
     }
 }

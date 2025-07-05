@@ -20,4 +20,12 @@ public class ResumeKafkaTopicsConfig {
                 .partitions(3)
                 .build();
     }
+
+    @Bean
+    public NewTopic deleteResumeById() {
+        return TopicBuilder.name(topicProps.getResumeDeleteRequest())
+                .replicas(2)
+                .partitions(3)
+                .build();
+    }
 }
