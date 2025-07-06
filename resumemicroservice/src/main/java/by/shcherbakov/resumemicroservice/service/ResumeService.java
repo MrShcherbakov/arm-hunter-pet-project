@@ -4,4 +4,5 @@ import by.shcherbakov.core_domain.dto.ResumeDto;
 
 public interface ResumeService {
     void saveResume(ResumeDto dto);
+    void deleteResumeById(ResumeDto dto);
 }

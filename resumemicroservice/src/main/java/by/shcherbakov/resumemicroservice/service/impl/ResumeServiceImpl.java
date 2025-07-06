@@ -23,4 +23,10 @@ public class ResumeServiceImpl implements ResumeService {
         Resume entity = repository.save(resume);
         log.info("Resume was saved in ResumeServiceImpl.saveResume: {}",entity);
     }
+
+    @Override
+    public void deleteResumeById(ResumeDto dto) {
+        repository.deleteById(dto.getId());
+        log.info("Resume with id {} was deleted in ResumeServiceImpl.deleteResumeById",dto.getId());
+    }
 }

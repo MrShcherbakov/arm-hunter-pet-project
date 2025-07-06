@@ -9,4 +9,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "topics.resume")
 public class ResumeTopicsProperties {
     private String resumeSaveRequest;
+    private String resumeDeleteRequest;
 }
