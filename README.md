@@ -25,10 +25,10 @@ This pet project is a simplified REST-based version of HeadHunter. It has users,
 **To see the endpoints look at the next title postman**
 # Postman
 - Save a user
-![userSavePostman](https://github.com/user-attachments/assets/6ceb70d7-6b41-4423-8d39-f2c746458afa)
+![userSavePostman](https://github.com/user-attachments/assets/70eb7482-5d2d-4ed9-a1a8-cd7b3acb4ed8)
 - Get a user
-![getUserPostman](https://github.com/user-attachments/assets/e212b364-4e4b-481c-b247-349c97a44cbf)
+![getUserPostman1](https://github.com/user-attachments/assets/a3cca587-2fa1-4862-a2f4-ba32b21a8611)
 - Save a resume (specify owner's ID in request)
-![resumeSavePostman](https://github.com/user-attachments/assets/0ccaaf3a-a202-484e-bd41-77569a7fdb29)
+![saveResumePostman1](https://github.com/user-attachments/assets/b8d726e7-3899-4105-93be-0c671ce9c3ea)
 - Delete a resume (specify resume's ID in request)
 ![deleteResumePostman](https://github.com/user-attachments/assets/76462fba-86ab-4f6f-95d1-723b7a36ae6a)
