@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
         RequestReplyFuture<String,Long,UserDto> future =
                 replyingKafkaTemplate.sendAndReceive(request);
-        log.info("ProducerRecord in findUserById was sended successfully: {}",request);
+        log.info("ProducerRecord in findUserById was sent successfully: {}",request);
 
         ConsumerRecord<String,UserDto> response;
         try {
@@ -59,9 +59,9 @@ public class UserServiceImpl implements UserService {
             SendResult<String,UserDto> result = kafkaTemplate.send(
                 topicProps.getUserSaveRequest(),dto
             ).get();
-            log.info("Request was sended in usermicroservice.saveUser endpoint: {}"
+            log.info("Request for the saving the user was sent in usermicroservice.saveUser endpoint: {}"
                     ,result.getRecordMetadata());
-            return "Request was sended in usermicroservice.saveUser endpoint: "
+            return "Request for the saving the user was sent in usermicroservice.saveUser endpoint: "
                     + result.getProducerRecord().value();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

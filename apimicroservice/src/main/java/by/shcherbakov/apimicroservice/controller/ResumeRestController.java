@@ -23,7 +23,7 @@ public class ResumeRestController {
 
     @PostMapping("/delete/{id}")
     public ResponseEntity<String> deleteResumeById(@PathVariable Long id) {
-        log.info("Id was received in deleteResume endpoint: {}",id);
+        log.info("Id was received in deleteResumeById endpoint: {}",id);
         return ResponseEntity.ok(service.deleteResumeById(id));
     }
 }
