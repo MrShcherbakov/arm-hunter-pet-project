@@ -28,6 +28,7 @@ public class UserDtoConsumerFactoryConfig {
     ) {
         ConcurrentKafkaListenerContainerFactory<String,UserDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
+        
         factory.setConsumerFactory(cf);
         return factory;
     }

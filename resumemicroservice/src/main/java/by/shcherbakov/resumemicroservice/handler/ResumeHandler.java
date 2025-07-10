@@ -24,12 +24,11 @@ public class ResumeHandler {
     }
 
     @KafkaListener(
-            topics = "#{resumeTopicsProperties.resumeDeleteRequest}",
+            topics = "#{@resumeTopicsProperties.resumeDeleteRequest}",
             containerFactory = "resumeDtoContainerFactory"
     )
     public void deleteResumeById(ResumeDto dto) {
         log.info("ResumeDto was received in deleteResumeById endpoint: {}",dto);
         service.deleteResumeById(dto);
     }
-
 }
