@@ -1,6 +1,7 @@
 package by.shcherbakov.usermicroservice.config.consumer;
 
 import by.shcherbakov.core_domain.dto.UserDto;
+import by.shcherbakov.usermicroservice.config.consumer.errorhandler.KafkaErrorHandler;
 import by.shcherbakov.usermicroservice.config.properties.KafkaProperties;
 import by.shcherbakov.usermicroservice.config.properties.consumer.UserDtoConsumerFactoryProperties;
 import lombok.AllArgsConstructor;
@@ -24,12 +25,14 @@ public class UserDtoConsumerFactoryConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String,UserDto> userDtoContainerFactory(
-            ConsumerFactory<String,UserDto> cf
+            ConsumerFactory<String,UserDto> cf,
+            KafkaErrorHandler errorHandler
     ) {
         ConcurrentKafkaListenerContainerFactory<String,UserDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         
         factory.setConsumerFactory(cf);
+        factory.setCommonErrorHandler(errorHandler);
         return factory;
     }
 
