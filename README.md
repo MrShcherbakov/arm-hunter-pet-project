@@ -24,8 +24,8 @@ This pet project is a simplified REST-based version of HeadHunter. It has users,
 - docker compose up – Start services
 **To see the endpoints look at the next title postman**
 # Postman
-- Save a user
-POST http://localhost:8080/user/save
+- Save a user <br/>
+POST http://localhost:8080/user/save <br/>
 Body's example:
 ```
 {
@@ -33,10 +33,10 @@ Body's example:
   "password": "qwerty"
 }
 ```
-- Get a user
+- Get a user <br/>
 GET http://localhost:8080/user/find/{id}
-- Save a resume (specify owner's ID in request)
-POST http://localhost:8080/resume/save
+- Save a resume (specify owner's ID in request) <br/>
+POST http://localhost:8080/resume/save <br/>
 Body's example:
 ```
 {
